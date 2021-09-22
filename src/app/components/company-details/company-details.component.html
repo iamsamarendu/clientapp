@@ -1,0 +1,101 @@
+<div class="row">
+    <div class="col-md-6">
+    <div *ngIf="currentCompany">
+      <h4>Comapany</h4>
+      <div>
+        <label><strong>Name:</strong> <strong>{{currentCompany.companyName}}</strong></label> 
+      </div>
+      <div>
+        <label><strong>Description:</strong> <strong>{{currentCompany.description}}</strong></label> 
+      </div>
+      <div>
+        <label><strong>CEO Name:</strong><strong>{{currentCompany.companyCEO}}</strong></label>
+
+      </div>
+      <div>
+        <label><strong>Comany Code:</strong><strong>{{currentCompany.companyCode}}</strong></label>
+
+      </div>
+      <div>
+        <label><strong>Website:</strong><strong>{{currentCompany.website}}</strong></label>
+
+      </div>
+      <div>
+        <label><strong>Turnover:</strong><strong>{{currentCompany.turnover}} (Cr)</strong></label>
+
+      </div>
+
+      
+    </div>
+    <br/>
+</div >
+
+<h4>Stocks <br/></h4>
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-4">
+      <label>Start Date</label>
+      <input
+        type="text"
+        class="form-control datePicker"
+        [(ngModel)]="startDate"
+      />
+      <label>End Date</label>
+      <div>
+        <input
+        type="text"
+        data-date-format="MM/DD/YYYY"
+        class="form-control"
+        [(ngModel)]="endDate"
+             
+      />
+        <div class="input-group-addon">
+          <span class="glyphicon glyphicon-th"></span>
+      </div>
+      </div>
+      
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchStock()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Price</th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let stock of stocks; let index = index">
+        <th scope="row">{{index+1}}</th>
+        <td>{{stock.stockDate}}</td>
+        <td>{{stock.stockPrice}}</td>
+        <td>{{stock.stockTime}}</td>
+      </tr>
+      <tr *ngIf="stocks && stocks.length==0">
+        <th scope="row" colspan="4">Stock information not available</th>
+      </tr>
+      
+    </tbody>
+  </table>
+  <div *ngIf="stocks && stocks.length!=0">
+    <p><b>Max</b> : {{max}}</p>
+    <p><b>Min</b> : {{min}}</p>
+    <p><b>Avg</b> : {{average}}</p>
+  </div>
+    <div *ngIf="!currentCompany">
+      <br />
+      <p>Company information is not available</p>
+       </div>
+  
+
